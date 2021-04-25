@@ -1,37 +1,70 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/oreilly-japan/sql-cookbook2-ja/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
+## 初期データ
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+本書のSQLを実行するには、以下のテーブルを作成しデータを入れておく必要があります。
 
-### Markdown
+### テーブルの作成
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+deptテーブルを作成します。
 
-```markdown
-Syntax highlighted code block
+```SQL
+CREATE TABLE dept (
+  deptno INT,
+  dname VARCHAR(14),
+  loc VARCHAR(13));
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+empテーブルを作成します。
 
-### Jekyll Themes
+```SQL
+CREATE TABLE emp (
+  empno INT primary key,
+  ename VARCHAR(10),
+  job VARCHAR(9),
+  mgr INT,
+  hiredate DATE,
+  sal DECIMAL(7,2),
+  comm DECIMAL(7,2),
+  deptno INT);
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/oreilly-japan/sql-cookbook2-ja/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+### データの投入
+
+deptテーブルにデータを投入します。
+
+```SQL
+INSERT INTO dept (deptno, dname, loc) VALUES
+  (10, 'ACCOUNTING', 'NEW YORK'),
+  (20, 'RESEARCH', 'DALLAS'),
+  (30, 'SALES', 'CHICAGO'),
+  (40, 'OPERATIONS', 'BOSTON');
+```
+
+
+empテーブルにデータを投入します。
+
+```SQL
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES
+       (7369,'SMITH','CLERK',7902,    '1980-12-17',800,NULL,20),
+       (7499,'ALLEN','SALESMAN',7698, '1981-02-20',1600,300,30),
+       (7521,'WARD','SALESMAN',7698,  '1981-02-22',1250,500,30),
+       (7566,'JONES','MANAGER',7839,  '1981-04-02',2975,NULL,20),
+       (7654,'MARTIN','SALESMAN',7698,'1981-09-28',1250,1400,30),
+       (7698,'BLAKE','MANAGER',7839,  '1981-05-01',2850,NULL,30),
+       (7782,'CLARK','MANAGER',7839,  '1981-06-09',2450,NULL,10),
+       (7788,'SCOTT','ANALYST',7566,  '1987-04-19',3000,NULL,20),
+       (7839,'KING','PRESIDENT',NULL, '1981-11-17',5000,NULL,10),
+       (7844,'TURNER','SALESMAN',7698,'1981-09-08',1500,0,30),
+       (7876,'ADAMS','CLERK',7788,    '1987-05-23',1100,NULL,20),
+       (7900,'JAMES','CLERK',7698,    '1981-12-03',950,NULL,30),
+       (7902,'FORD','ANALYST',7566,   '1981-12-03',3000,NULL,20);
+```
+
+## 正誤表
+
+本書の正誤情報は現在準備中です。
+
+正誤情報に掲載されていない誤植や間違いなどを見つけた方は、[:email: japan@oreilly.co.jp](<mailto:japan@oreilly.co.jp>)までお知らせください。
