@@ -67,4 +67,4 @@ INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES
 
 本書の正誤情報は現在準備中です。
 
-正誤情報に掲載されていない誤植や間違いなどを見つけた方は、[:email: japan@oreilly.co.jp](<mailto:japan@oreilly.co.jp>)までお知らせください。
+誤植や間違いなどを見つけた方は、[:email: japan@oreilly.co.jp](<mailto:japan@oreilly.co.jp>)までお知らせください。
