@@ -46,7 +46,7 @@ INSERT INTO dept (deptno, dname, loc) VALUES (40, 'OPERATIONS', 'BOSTON');
 
 empテーブルにデータを投入します。
 
-#### DB2, MSSQL Server, Oracle, PostgreSQL
+#### SQL Server, Oracle, PostgreSQL
 
 ```SQL
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7369, 'SMITH' , 'CLERK'    , 7902, '17-DEC-2005', 800,  NULL, 20);
@@ -89,6 +89,68 @@ INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (78
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7900, 'JAMES' , 'CLERK'    , 7698, STR_TO_DATE('03-DEC-2006', '%d-%b-%Y'),  950, NULL, 30);
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7902, 'FORD'  , 'ANALYST'  , 7566, STR_TO_DATE('03-DEC-2006', '%d-%b-%Y'), 3000, NULL, 20);
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7934, 'MILLER', 'CLERK'    , 7782, STR_TO_DATE('23-JAN-2007', '%d-%b-%Y'), 1300, NULL, 10);
+```
+```
+
+#### DB2
+
+DB2もMySQL同様、前述のSQLをそのまま実行できません。日付のフォーマット
+の文字列をTO_DATEを用いて変換します。
+
+```SQL
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7369, 'SMITH' , 'CLERK'    , 7902, TO_DATE('17-DEC-2005', 'DD-MON-YYYY'), 800,  NULL, 20);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7499, 'ALLEN' , 'SALESMAN' , 7698, TO_DATE('20-FEB-2006', 'DD-MON-YYYY'), 1600, 300 , 30);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7521, 'WARD'  , 'SALESMAN' , 7698, TO_DATE('22-FEB-2006', 'DD-MON-YYYY'), 1250, 500 , 30);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7566, 'JONES' , 'MANAGER'  , 7839, TO_DATE('02-APR-2006', 'DD-MON-YYYY'), 2975, NULL, 20);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7654, 'MARTIN', 'SALESMAN' , 7698, TO_DATE('28-SEP-2006', 'DD-MON-YYYY'), 1250, 1400, 30);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7698, 'BLAKE' , 'MANAGER'  , 7839, TO_DATE('01-MAY-2006', 'DD-MON-YYYY'), 2850, NULL, NULL);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7782, 'CLARK' , 'MANAGER'  , 7839, TO_DATE('09-JUN-2006', 'DD-MON-YYYY'), 2450, NULL, 10);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7788, 'SCOTT' , 'ANALYST'  , 7566, TO_DATE('09-DEC-2007', 'DD-MON-YYYY'), 3000, NULL, 20);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7839, 'KING'  , 'PRESIDENT', NULL, TO_DATE('17-NOV-2006', 'DD-MON-YYYY'), 5000, NULL, 10);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7844, 'TURNER', 'SALESMAN' , 7698, TO_DATE('08-SEP-2006', 'DD-MON-YYYY'), 1500, 0   , 30);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7876, 'ADAMS' , 'CLERK'    , 7788, TO_DATE('12-JAN-2008', 'DD-MON-YYYY'), 1100, NULL, 20);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7900, 'JAMES' , 'CLERK'    , 7698, TO_DATE('03-DEC-2006', 'DD-MON-YYYY'),  950, NULL, 30);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7902, 'FORD'  , 'ANALYST'  , 7566, TO_DATE('03-DEC-2006', 'DD-MON-YYYY'), 3000, NULL, 20);
+INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7934, 'MILLER', 'CLERK'    , 7782, TO_DATE('23-JAN-2007', 'DD-MON-YYYY'), 1300, NULL, 10);
+```
+
+### 各章で用いられているデータ
+
+#### ３章
+
+##### emp_bonus
+
+従業員のボーナスに関わるテーブルを用いています。
+
+```
+CREATE TABLE emp_bonus (empno INT, received DATE, type INT);
+```
+
+
+以下のデータが投入されてます。
+
+###### SQL Server, Oracle, PostgreSQL
+
+```
+INSERT INTO emp_bonus(empno, received, type) VALUES (7369, '14-MAR-2005', 1);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7900, '14-MAR-2005', 2);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7788, '14-MAR-2005', 3);
+```
+
+###### MySQL
+
+```
+INSERT INTO emp_bonus(empno, received, type) VALUES (7369, STR_TO_DATE('14-MAR-2005', '%d-%b-%Y'), 1);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7900, STR_TO_DATE('14-MAR-2005', '%d-%b-%Y'), 2);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7788, STR_TO_DATE('14-MAR-2005', '%d-%b-%Y'), 3);
+```
+
+###### DB2
+
+```
+INSERT INTO emp_bonus(empno, received, type) VALUES (7369, TO_DATE('14-MAR-2005', 'DD-MON-YYYY'), 1);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7900, TO_DATE('14-MAR-2005', 'DD-MON-YYYY'), 2);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7788, TO_DATE('14-MAR-2005', 'DD-MON-YYYY'), 3);
 ```
 
 ## 正誤表
