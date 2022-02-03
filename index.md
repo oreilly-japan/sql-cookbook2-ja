@@ -2,7 +2,7 @@
 
 このサイトはSQLクックブック 第2版のサポートページです。
 
-<img src="./picture_large978-4-87311-977-9.jpeg" width="50%">
+<img src="./picture_large978-4-87311-977-9.jpeg" width="500px">
 
 本書のSQLを実行するには、以下のテーブルを作成しデータを入れておく必要があります。
 
