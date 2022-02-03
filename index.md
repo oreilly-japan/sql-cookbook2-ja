@@ -155,6 +155,6 @@ INSERT INTO emp_bonus(empno, received, type) VALUES (7788, TO_DATE('14-MAR-2005'
 
 ## 正誤表
 
-本書の正誤情報は https://www.oreilly.co.jp/books/9784873119779/#errata0 です。
+本書の正誤情報は[こちら](https://www.oreilly.co.jp/books/9784873119779/#errata0)です。
 
 誤植や間違いなどを見つけた方は、[:email: japan@oreilly.co.jp](<mailto:japan@oreilly.co.jp>)までお知らせください。
