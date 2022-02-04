@@ -1,5 +1,5 @@
 title: SQLクックブック 第2版 サポートページ
 description:
-baseurl: ""
-url: "https://oreilly-japan.github.io/sql-cookbook2-ja/"
+baseurl: "/sql-cookbook2-ja"
+url: "https://oreilly-japan.github.io"
 theme: minima
