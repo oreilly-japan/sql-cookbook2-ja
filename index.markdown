@@ -1,3 +1,7 @@
+---
+layout: home
+---
+
 ## <a href="https://www.oreilly.co.jp/books/9784873119779/">SQLクックブック 第2版<br />― データベースエキスパート、データサイエンティストのための実践レシピ集</a>
 
 このサイトはSQLクックブック 第2版のサポートページです。
@@ -71,12 +75,11 @@ INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (79
 
 #### MySQL
 
-MySQLはdate型のカラムにデータを入れる時に行われる暗黙的型変換のフォー
-マットが異なり、前述のSQLをそのまま実行できません。日付のフォーマット
-を2005-12-17のような形式にするか、STR_TO_DATE関数を用いてフォーマット
-を指定して読み取るなどの処理をする必要があります。今回は前述のSQLをな
-るべくそのまま用いたいので、STR_TO_DATE()関数を用いて日付のデータを変
-換する方法を用います。
+MySQLはdate型のカラムにデータを入れる時に行われる暗黙的型変換のフォーマットが異なり、
+前述のSQLをそのまま実行できません。
+日付のフォーマットを2005-12-17のような形式にするか、
+STR_TO_DATE関数を用いてフォーマットを指定して読み取るなどの処理をする必要があります。今回は前述のSQLをなるべくそのまま用いたいので、
+STR_TO_DATE()関数を用いて日付のデータを変換する方法を用います。
 
 ```SQL
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7369, 'SMITH' , 'CLERK'    , 7902, STR_TO_DATE('17-DEC-2005', '%d-%b-%Y'), 800,  NULL, 20);
@@ -94,12 +97,10 @@ INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (79
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7902, 'FORD'  , 'ANALYST'  , 7566, STR_TO_DATE('03-DEC-2006', '%d-%b-%Y'), 3000, NULL, 20);
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7934, 'MILLER', 'CLERK'    , 7782, STR_TO_DATE('23-JAN-2007', '%d-%b-%Y'), 1300, NULL, 10);
 ```
-```
 
 #### DB2
 
-DB2もMySQL同様、前述のSQLをそのまま実行できません。日付のフォーマット
-の文字列をTO_DATEを用いて変換します。
+DB2もMySQL同様、前述のSQLをそのまま実行できません。日付のフォーマットの文字列をTO_DATEを用いて変換します。
 
 ```SQL
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7369, 'SMITH' , 'CLERK'    , 7902, TO_DATE('17-DEC-2005', 'DD-MON-YYYY'), 800,  NULL, 20);
@@ -161,4 +162,4 @@ INSERT INTO emp_bonus(empno, received, type) VALUES (7788, TO_DATE('14-MAR-2005'
 
 本書の正誤情報は[こちら](https://www.oreilly.co.jp/books/9784873119779/#errata0)です。
 
-誤植や間違いなどを見つけた方は、[:email: japan@oreilly.co.jp](<mailto:japan@oreilly.co.jp>)までお知らせください。
+誤植や間違いなどを見つけた方は、[japan@oreilly.co.jp](<mailto:japan@oreilly.co.jp>)までお知らせください。

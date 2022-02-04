@@ -1,1 +1,5 @@
+title: SQLクックブック 第2版 サポートページ
+description:
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://oreilly-japan.github.io/sql-cookbook2-ja/"
 theme: minima
