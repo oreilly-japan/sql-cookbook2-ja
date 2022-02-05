@@ -132,30 +132,30 @@ CREATE TABLE emp_bonus (empno INT, received DATE, type INT);
 ```
 
 
-以下のデータが投入されてます。
+以下のデータが投入されています。
 
 ###### SQL Server, Oracle, PostgreSQL
 
 ```
-INSERT INTO emp_bonus(empno, received, type) VALUES (7369, '14-MAR-2005', 1);
-INSERT INTO emp_bonus(empno, received, type) VALUES (7900, '14-MAR-2005', 2);
-INSERT INTO emp_bonus(empno, received, type) VALUES (7788, '14-MAR-2005', 3);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7369, '14-MAR-2015', 1);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7900, '14-MAR-2015', 2);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7788, '14-MAR-2015', 3);
 ```
 
 ###### MySQL
 
 ```
-INSERT INTO emp_bonus(empno, received, type) VALUES (7369, STR_TO_DATE('14-MAR-2005', '%d-%b-%Y'), 1);
-INSERT INTO emp_bonus(empno, received, type) VALUES (7900, STR_TO_DATE('14-MAR-2005', '%d-%b-%Y'), 2);
-INSERT INTO emp_bonus(empno, received, type) VALUES (7788, STR_TO_DATE('14-MAR-2005', '%d-%b-%Y'), 3);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7369, STR_TO_DATE('14-MAR-2015', '%d-%b-%Y'), 1);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7900, STR_TO_DATE('14-MAR-2015', '%d-%b-%Y'), 2);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7788, STR_TO_DATE('14-MAR-2015', '%d-%b-%Y'), 3);
 ```
 
 ###### DB2
 
 ```
-INSERT INTO emp_bonus(empno, received, type) VALUES (7369, TO_DATE('14-MAR-2005', 'DD-MON-YYYY'), 1);
-INSERT INTO emp_bonus(empno, received, type) VALUES (7900, TO_DATE('14-MAR-2005', 'DD-MON-YYYY'), 2);
-INSERT INTO emp_bonus(empno, received, type) VALUES (7788, TO_DATE('14-MAR-2005', 'DD-MON-YYYY'), 3);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7369, TO_DATE('14-MAR-2015', 'DD-MON-YYYY'), 1);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7900, TO_DATE('14-MAR-2015', 'DD-MON-YYYY'), 2);
+INSERT INTO emp_bonus(empno, received, type) VALUES (7788, TO_DATE('14-MAR-2015', 'DD-MON-YYYY'), 3);
 ```
 
 ## 正誤表
