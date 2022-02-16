@@ -10,6 +10,185 @@ layout: home
 
 本書のSQLを実行するには、以下のテーブルを作成しデータを入れておく必要があります。
 
+
+### 環境の作成
+
+本書ではデータベースを扱っていますが、書籍内ではデータベースサーバーの構築方法は解説していません。
+各自必要な環境を作成すればよいですが、ここでは一例としてDockerを用いてlocalでの環境の構築方法について解説します。
+なおDocker自体は既にインストールされていることを前提とします。
+また検証用にローカルで起動することを前提とするため使用するパスワードなどが脆弱な状態になっています。
+決して外部への公開をしないようにご注意下さい。
+
+#### MySQL
+
+Docker ImageをPullします。
+
+```
+docker pull mysql:8.0.23
+```
+
+コンテナを起動します。
+
+```
+docker run -it --rm \
+       --privileged=true \
+       --publish="127.0.0.1:3306:3306" \
+       --expose="3306" \
+       --volume "mysql-server-8-data:/var/lib/mysql" \
+       --name="mysqld" \
+       --env 'MYSQL_ALLOW_EMPTY_PASSWORD=1' \
+       mysql:8.0.23
+```
+
+別のターミナルエミュレーターを開きコンテナ内でデータベースに接続します。
+
+```
+docker exec -it mysqld mysql
+```
+
+#### PostgreSQL
+
+Docker ImageをPullします。
+
+```
+docker pull postgres:12-alpine
+```
+
+コンテナを起動します。
+
+```
+docker run -it --rm \
+       --privileged=true \
+       --publish="127.0.0.1:5432:5432" \
+       --expose="5432" \
+       --volume "postgres-12-data:/var/lib/postgresql/data" \
+       --name="postgres" \
+       --env='POSTGRES_PASSWORD=postgres' \
+       postgres:12-alpine
+```
+
+別のターミナルエミュレーターを開きコンテナ内でデータベースに接続します。
+
+```
+docker exec -it postgres psql -U postgres
+```
+
+#### Microsoft SQL Server
+
+Docker ImageをPullします。
+
+```
+docker pull mcr.microsoft.com/mssql/server:2017-latest
+```
+
+コンテナを起動します。
+
+```
+docker run -it --rm \
+       --privileged=true \
+       --publish="127.0.0.1:1443:1443" \
+       --expose="1443" \
+       --name="mssql" \
+       --env='ACCEPT_EULA=Y' \
+       --env='SA_PASSWORD=Testing1234!' \
+       mcr.microsoft.com/mssql/server:2017-latest
+```
+
+別のターミナルエミュレーターを開きコンテナ内でデータベースに接続します。
+
+```
+docker exec -ti mssql bash -c '/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Testing1234!"'
+```
+
+#### Db2
+
+Docker ImageをPullします。
+
+```
+docker pull ibmcom/db2/11.5.0.0
+```
+
+コンテナを起動します。
+
+```
+docker run -it --rm \
+       --privileged=true \
+       --publish="127.0.0.1:50000:50000" \
+       --env='DB2INST1_PASSWORD=Testing1234!' \
+       --env='LICENSE=accept' \
+       --env='SAMPLEDB=true' \
+       --volume="db2-data:/database" \
+       --name='db2-server' \
+       'ibmcom/db2:11.5.5.0'
+
+```
+
+別のターミナルエミュレーターを開きコンテナ内でデータベースに接続します。
+
+```
+docker exec -ti db2-server bash -c "su - db2inst1 -c 'db2 -t'"
+```
+
+#### Oracle Database
+
+Oracle DatabaseについてはDocker Imaggが提供されていません。
+しかしソースコードとDocker Imageを作成するためのDockerfileやビルドスクリプトは提供されています。今回はそれらを用いてOracle DatabaseのDocker Imageをビルドします。
+
+
+ソースコードはOracleからダウンロードします。
+
+[[https://www.oracle.com/jp/database/technologies/oracle-database-software-downloads.html#19c]]
+
+ダウンロードする際、Oracleのアカウントが必要なので適宜作ります。
+
+
+Oracle DatabaseのDocker関連のファイルはGithubでホスティングされています。
+Gitコマンドを使って取得します。
+
+```
+git clone https://github.com/oracle/docker-images oracle-docker-images
+```
+
+ダウンロードしたソースコードのzipファイルを =oracle-docker-images/OracleDatabase/SingleInstance/dockerfiles/19.3.0= 配下に配置します。
+
+```
+mv LINUX.X64_193000_db_home.zip oracle-docker-images/OracleDatabase/SingleInstance/dockerfiles/19.3.0
+```
+
+`oracle-docker-images/OracleDatabase/SingleInstance/dockerfiles/` にカレントディレクトリを移動して `buildContainerImage.sh` を用いてイメージをビルドします。
+
+```
+cd oracle-docker-images/OracleDatabase/SingleInstance/dockerfiles
+./buildContainerImage.sh -v 19.3.0 -e -i
+```
+
+ビルドには時間がかかります。
+
+ビルドが完了すると6.53GBの大きなDocker Imageができます。
+
+コンテナを起動します。
+
+```
+docker run -it --rm \
+     --privileged=true \
+     --publish="127.0.0.1:1521:1521" \
+     --publish="127.0.0.1:5500:5500" \
+     --expose="1521" \
+     --expose="5500" \
+     --name="oracle" \
+     --env="ORACLE_PWD=testing1234" \
+     oracle/database:19.3.0-ee
+
+```
+
+初回起動には時間がかかります。
+
+別のターミナルエミュレーターを開きコンテナ内でデータベースに接続します。
+
+```
+docker exec -ti oracle bash -c "sqlplus sys/testing1234@localhost:1521/ORCLCDB as sysdba"
+```
+
 ### テーブルの作成
 
 deptテーブルを作成します。
@@ -163,3 +342,7 @@ INSERT INTO emp_bonus(empno, received, type) VALUES (7788, TO_DATE('14-MAR-2015'
 本書の正誤情報は[こちら](https://www.oreilly.co.jp/books/9784873119779/#errata0)です。
 
 誤植や間違いなどを見つけた方は、[japan@oreilly.co.jp](<mailto:japan@oreilly.co.jp>)までお知らせください。
+
+## 注意事項
+
+なお、希望通りに動作されない場合の原因解明などや個人レッスンに相当するご要望にはご対応できかねますので、ご了承いただければ幸いです。
