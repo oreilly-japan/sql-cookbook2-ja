@@ -137,7 +137,7 @@ Oracle DatabaseについてはDocker Imaggが提供されていません。
 
 ソースコードはOracleからダウンロードします。
 
-[[https://www.oracle.com/jp/database/technologies/oracle-database-software-downloads.html#19c]]
+https://www.oracle.com/jp/database/technologies/oracle-database-software-downloads.html#19c
 
 ダウンロードする際、Oracleのアカウントが必要なので適宜作ります。
 
@@ -149,7 +149,7 @@ Gitコマンドを使って取得します。
 git clone https://github.com/oracle/docker-images oracle-docker-images
 ```
 
-ダウンロードしたソースコードのzipファイルを =oracle-docker-images/OracleDatabase/SingleInstance/dockerfiles/19.3.0= 配下に配置します。
+ダウンロードしたソースコードのzipファイルを `oracle-docker-images/OracleDatabase/SingleInstance/dockerfiles/19.3.0` 配下に配置します。
 
 ```
 mv LINUX.X64_193000_db_home.zip oracle-docker-images/OracleDatabase/SingleInstance/dockerfiles/19.3.0
